@@ -1,29 +1,43 @@
-import React from 'react';
+import React from "react";
 
 class App extends React.Component {
-
   pigLatin = (english) => {
     // https://edstem.org/courses/4230/challenges/15985
     // logic for translating english to pig latin
     // return something
-    return "ishay iglay"
-  }
+    function toPigLatin(phrase) {
+      if (phrase.length == 0) {
+        return "";
+      }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    const english = event.target[0].value
-    const result = this.pigLatin(english)
-    this.setState({ pigLatin: result })
-  }
+      let array = phrase.split(" ");
+
+      for (let i = 0; i < array.length; i++) {
+        array[i] =
+          array[i].slice(1, array[i].length) + array[i].slice(0, 1) + "ay";
+      }
+
+      return array.join(" ");
+    }
+    return toPigLatin(english);
+  };
+
+  handleChange = (event) => {
+    event.preventDefault();
+    // console.log(event.target.value);
+    const english = event.target.value;
+    const result = this.pigLatin(english);
+    this.setState({ pigLatin: result });
+  };
 
   render() {
-    const pigLatin = this.state?.pigLatin
+    const pigLatin = this.state?.pigLatin;
     return (
       <div className="container">
         <h1>Convert english to pig latin! 🐷</h1>
-        <form onSubmit={this.handleSubmit} >
+        <form onChange={this.handleChange}>
           <textarea name="pig" id="pig"></textarea>
-          <input type="submit" value="Convert"/>
+          {/* <input type="submit" value="Convert" /> */}
         </form>
         <h1>Output</h1>
         <div className="output">
