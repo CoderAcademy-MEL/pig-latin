@@ -3,21 +3,22 @@ import React from 'react';
 class App extends React.Component {
 
   pigLatin = (english) => {
-    // https://edstem.org/courses/4230/challenges/15985
-    // logic for translating english to pig latin
-    // return something
-    if(english ===""){
-      return ""
-    }
-    let newArr = [];
-    let phraseArr = english.split(" ")
-    phraseArr.forEach((word)=>{
-      let newWord = word.substring(1,word.length)+word.charAt(0)+"ay"
-      newArr.push(newWord);
-    })
-    return newArr.join(" ")
-  }
-
+      let words = english.split(" ")
+      let newWord = ""
+      let res = []
+      
+      if (english.length < 1) {
+        return ""
+      }
+      words.forEach(function(index) {
+        let first = index.charAt(0);
+      
+        newWord = index.replace(first,"")+ first + "ay"
+        res.push(newWord)
+       });
+       return res.join(" ")
+      }
+  
   handleSubmit = (event) => {
     event.preventDefault()
     const english = event.target[0].value
